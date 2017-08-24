@@ -21,5 +21,6 @@ class InsertionSort
 		end
 
 		return array
-		
+	end
+
 end

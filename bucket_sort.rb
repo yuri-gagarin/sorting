@@ -1,20 +1,33 @@
+require "./insertion_sort.rb"
+
 class BucketSort
 
-	def self.sort(a, n, buckets, m)
+	def self.sort(array, buckets_size=4)
 
-  		for j in 0...m
-    		buckets[j] = 0
-  		end
+		min_val = array.min
+		max_val = array.max 
 
-  		for i in 0...n
-    		buckets[a[i]] += 1
-  		end
-  		i = 0
-  		for j in 0...m
-    		for k in 0...buckets[j]
-      			a[i] = j
-     			 i += 1
-    		end
-  		end
+		bucket_count = ((max_val - min_val) / buckets_size).floor + 1
+
+		buckets = Array.new(bucket_count)
+
+		(0..buckets.length - 1).each do | i | 
+			buckets[i] = []
+		end
+
+		(0..array.length - 1).each do | i | 
+			buckets[ ((array[i] - min_val) / buckets_size).floor ].push(array[i])
+		end
+
+		array.clear
+
+		(0..buckets.length - 1).each do | i | 
+			InsertionSort.sort( buckets[i] )
+			buckets[i].each do | val |
+				array.push(val)
+			end
+		end
+
 	end
+
 end

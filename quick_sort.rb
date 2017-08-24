@@ -1,4 +1,4 @@
-class Quicksort
+class QuickSort
 
 	def self.sort(array)
 
